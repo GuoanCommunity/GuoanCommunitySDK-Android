@@ -35,6 +35,15 @@
 **相关api**
 
      sdk初始化：
+     
+     清单文件添加 在国安社区授权的appid和appsecret，如下
+     <meta-data
+           android:name="COMMUNITY_APP_ID"
+           android:value="xxxxxxxxxxx" />
+     <meta-data
+           android:name="COMMUNITY_APP_SECRET"
+           android:value="ooooooooooo" />
+           
      在宿主项目application基类onCreate()里面：
      CommunityFactory.getInstance()?.initSdkAuth(applicationContext, null, null)
      CommunityFactory.getInstance()?.initCallBack(object : CommunityCallBack {
