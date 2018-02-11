@@ -32,3 +32,38 @@
 
     把国安社区sdk：communitysdk-release.aar 放到libs里面
 
+**相关api**
+
+     sdk初始化：
+     在宿主项目application基类onCreate()里面：
+     CommunityFactory.getInstance()?.initSdkAuth(applicationContext, null, null)
+     CommunityFactory.getInstance()?.initCallBack(object : CommunityCallBack {
+                 override fun onGetUserInfo(): CommunityUserInfo? {
+                     //构造用户信息
+                     return CommunityUserInfo("e12sdfwefcdzfsd", "13555865965")
+                 }
+     
+                 override fun onSelectPicture(context: Context?) {
+                     
+                 }
+     
+                 override fun onShare(context: Context?, json: String?) {
+                     
+                 }
+     
+                 override fun onPay(context: Context?, orderId: String?, payMoney: BigDecimal?) {
+                     
+                 }
+             })
+            
+     宿主app如果有登录功能，登录成功后执行：
+     CommunityFactory.getInstance()?.onSaveUserInfo(userInfo)
+             
+     跳转到国安社区页面
+     CommunityFactory.getInstance()?.onIntoCommunityHome(this)
+     
+     销毁sdk
+     在宿主app的退出app方法体内执行：
+     CommunityFactory.onDestory()
+     
+     
