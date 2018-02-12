@@ -1,7 +1,7 @@
 package com.guoan.sdkdemo
 
+import android.app.Application
 import android.content.Context
-import android.support.multidex.MultiDexApplication
 import com.guoan.community.sdk.CommunityFactory
 import com.guoan.community.sdk.business.CommunityCallBack
 import com.guoan.community.sdk.userinfo.CommunityUserInfo
@@ -12,7 +12,7 @@ import java.math.BigDecimal
  * Created by andylove on 2018/2/8.
  * demo application
  */
-class MyApplication : MultiDexApplication() {
+class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
