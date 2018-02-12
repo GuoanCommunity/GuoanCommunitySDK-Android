@@ -28,7 +28,7 @@
 依赖(如果项目已经有以下依赖，可忽略)
 
     dependencies {
-    compile 'com.guoan.community.sdk:communitysdk:1.0.1'
+    compile 'com.guoan.community.sdk:communitysdk:1.0.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation "org.jetbrains.anko:anko-sdk15:$anko_version"
     implementation 'com.android.support:appcompat-v7:25.4.0'
