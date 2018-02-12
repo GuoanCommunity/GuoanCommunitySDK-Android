@@ -24,7 +24,7 @@ android {
 
 dependencies {
 //    implementation project(':communitysdk')
-    compile 'com.guoan.community.sdk:communitysdk:1.0.2'
+    compile 'com.guoan.community.sdk:communitysdk:1.0.3'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation "org.jetbrains.anko:anko-sdk15:$anko_version"
     implementation 'com.android.support:appcompat-v7:25.4.0'
