@@ -2,8 +2,10 @@ package com.guoan.sdkdemo
 
 import android.app.Application
 import android.content.Context
+import android.content.Intent
 import com.guoan.community.sdk.CommunityFactory
 import com.guoan.community.sdk.business.CommunityCallBack
+import com.guoan.community.sdk.store.CommunityLocation
 import com.guoan.community.sdk.userinfo.CommunityUserInfo
 import org.jetbrains.anko.toast
 import java.math.BigDecimal
@@ -14,29 +16,42 @@ import java.math.BigDecimal
  */
 class MyApplication : Application() {
 
+    companion object {
+        var phone: String? = null
+        var token: String? = null
+
+        var lat: String? = null
+        var lon: String? = null
+        var cityCode: String? = null
+    }
+
     override fun onCreate() {
         super.onCreate()
         //集成国安社区
         CommunityFactory.getInstance()?.initSdkAuth(applicationContext, null, null)
         CommunityFactory.getInstance()?.initCallBack(object : CommunityCallBack {
+            override fun onGetLocation(): CommunityLocation? {
+                return CommunityLocation(lat, lon, "xxx", cityCode, "xxx", "xxx")
+            }
+
             override fun onTryLogin(context: Context?) {
-                toast("去登录")
+                context?.startActivity(Intent(context, LoginActivity::class.java))
             }
 
             override fun onGetUserInfo(): CommunityUserInfo? {
-                return CommunityUserInfo("e12sdfwefcdzfsd", "13555865965")
-            }
-
-            override fun onSelectPicture(context: Context?) {
-                toast("去打开照片选择")
+                if (phone == null || token == null) {
+                    return null
+                }
+                var userInfo = CommunityUserInfo(token, phone)
+                return userInfo
             }
 
             override fun onShare(context: Context?, json: String?) {
-                toast("去打开分享")
+                toast("调起宿主分享"+json)
             }
 
             override fun onPay(context: Context?, orderId: String?, payMoney: BigDecimal?) {
-                toast("调起支付")
+                toast("调起宿主支付" + orderId + payMoney)
             }
         })
 

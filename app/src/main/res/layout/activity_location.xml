@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:text="宿主页面"
+        android:textColor="@color/colorPrimary"
+        android:textSize="30sp" />
+
+    <EditText
+        android:id="@+id/lat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="纬度"
+        android:text="39.921748"
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/lon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="纬度"
+        android:text="116.460549"
+        android:padding="10dp"/>
+
+
+    <EditText
+        android:id="@+id/city_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="城市码"
+        android:text="010"
+        android:padding="10dp"/>
+
+    <Button
+        android:id="@+id/loc_success"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="50dp"
+        android:text="定位成功" />
+
+</LinearLayout>

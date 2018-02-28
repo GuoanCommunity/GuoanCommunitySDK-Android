@@ -1,5 +1,6 @@
 package com.guoan.sdkdemo
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.guoan.community.sdk.CommunityFactory
@@ -17,6 +18,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         ck_enter_sdk?.onClick {
             CommunityFactory.getInstance()?.onIntoCommunityHome(this@MainActivity)
+        }
+        login?.onClick {
+            startActivity(Intent(this@MainActivity, LoginActivity::class.java))
+        }
+        loc?.onClick {
+            startActivity(Intent(this@MainActivity, LocationActivity::class.java))
         }
     }
 }
