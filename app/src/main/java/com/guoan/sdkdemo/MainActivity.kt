@@ -25,5 +25,10 @@ class MainActivity : AppCompatActivity() {
         loc?.onClick {
             startActivity(Intent(this@MainActivity, LocationActivity::class.java))
         }
+        exit?.onClick {
+            finish()
+            CommunityFactory.onDestory()
+        }
     }
+
 }

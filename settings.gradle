@@ -1,1 +1,1 @@
-include ':app', ':communitysdk'
+include ':app', ':communitysdk', ':app2'

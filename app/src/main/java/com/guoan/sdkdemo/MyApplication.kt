@@ -30,6 +30,10 @@ class MyApplication : Application() {
         //集成国安社区
         CommunityFactory.getInstance()?.initSdkAuth(applicationContext, null, null)
         CommunityFactory.getInstance()?.initCallBack(object : CommunityCallBack {
+            override fun onTryLocation(context: Context?) {
+                toast("无法获取位置信息,待宿主定位")
+            }
+
             override fun onGetLocation(): CommunityLocation? {
                 return CommunityLocation(lat, lon, "xxx", cityCode, "xxx", "xxx")
             }
