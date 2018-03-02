@@ -29,9 +29,11 @@
 
     dependencies {
     compile 'com.guoan.community.sdk:communitysdk:1.0.5'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation "org.jetbrains.anko:anko-sdk15:$anko_version"
     implementation 'com.android.support:appcompat-v7:25.4.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.2.0"
+    implementation "org.jetbrains.anko:anko-sdk15:0.8.3"
+    implementation 'com.google.code.gson:gson:2.8.0'
+    implementation "com.squareup.okhttp3:okhttp:3.6.0"
      }
 **可能遇到的冲突**
 
