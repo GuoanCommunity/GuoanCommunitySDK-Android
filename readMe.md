@@ -8,13 +8,9 @@
         }
 
 # sdk集成 #
-**文件build.gradle**
+
+**项目跟目录文件build.gradle**
  
-     buildscript {
-        ext.kotlin_version = '1.2.0'
-        ext.anko_version = '0.8.3'
-     }
-     
     allprojects {
     repositories {
         maven {
@@ -25,16 +21,10 @@
 
 **文件app/build.gradle**
 
-依赖(如果项目已经有以下依赖，可忽略)
-
     dependencies {
-    compile 'com.guoan.community.sdk:communitysdk:1.0.5'
-    implementation 'com.android.support:appcompat-v7:25.4.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.2.0"
-    implementation "org.jetbrains.anko:anko-sdk15:0.8.3"
-    implementation 'com.google.code.gson:gson:2.8.0'
-    implementation "com.squareup.okhttp3:okhttp:3.6.0"
+        compile 'com.guoan.community.sdk:communitysdk:1.0.5'
      }
+     
 **可能遇到的冲突**
 
      国安社区sdk目前引入的jar包如下：（不断更新中。。。）
