@@ -23,7 +23,7 @@ class LoginActivity : AppCompatActivity() {
             MyApplication.phone = accout?.text?.toString()
             MyApplication.token = token
 
-            var info = CommunityUserInfo(MyApplication.token, MyApplication.phone)
+            var info = CommunityUserInfo(MyApplication.token, MyApplication.phone, "", "")
             CommunityFactory.getInstance()?.onSaveUserInfo(info)
 
             finish()

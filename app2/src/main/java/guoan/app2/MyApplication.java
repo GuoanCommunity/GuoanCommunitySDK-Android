@@ -6,10 +6,11 @@ import android.widget.Toast;
 
 import com.guoan.community.sdk.CommunityFactory;
 import com.guoan.community.sdk.business.CommunityCallBack;
-import com.guoan.community.sdk.store.CommunityLocation;
+import com.guoan.community.sdk.store.CommunityAddress;
 import com.guoan.community.sdk.userinfo.CommunityUserInfo;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  *
@@ -26,8 +27,15 @@ public class MyApplication extends Application {
         CommunityFactory.Companion.getInstance().initCallBack(new CommunityCallBack() {
 
             @Override
-            public void onTryLocation(Context context) {
-                Toast.makeText(context, "无法获取位置信息,待宿主定位", Toast.LENGTH_SHORT).show();
+            public List<CommunityAddress> onGetUserAddressList(Context context) {
+                Toast.makeText(context, "获取地址列表", Toast.LENGTH_SHORT).show();
+                return null;
+            }
+
+            @Override
+            public CommunityAddress onGetTempAddress() {
+                Toast.makeText(getApplicationContext(), "获取地址", Toast.LENGTH_SHORT).show();
+                return null;
             }
 
             @Override
@@ -38,6 +46,8 @@ public class MyApplication extends Application {
 
             @Override
             public CommunityUserInfo onGetUserInfo() {
+                Toast.makeText(getApplicationContext(), "获取用户信息", Toast.LENGTH_SHORT).show();
+
                 return null;
             }
 
@@ -51,11 +61,6 @@ public class MyApplication extends Application {
             public void onTryLogin(Context context) {
                 Toast.makeText(context, "去登录", Toast.LENGTH_SHORT).show();
 
-            }
-
-            @Override
-            public CommunityLocation onGetLocation() {
-                return null;
             }
         });
     }

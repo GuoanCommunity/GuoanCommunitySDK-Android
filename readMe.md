@@ -48,41 +48,43 @@
            
      在宿主项目application基类onCreate()里面：
              CommunityFactory.getInstance()?.initSdkAuth(applicationContext, null, null)
-             CommunityFactory.getInstance()?.initCallBack(object : CommunityCallBack {
-                 override fun onTryLocation(context: Context?) {
-                     toast("无法获取位置信息,待宿主定位")
-                 }
-     
-                 override fun onGetLocation(): CommunityLocation? {
-                     return CommunityLocation(lat, lon, "xxx", cityCode, "xxx", "xxx")
-                 }
-     
-                 override fun onTryLogin(context: Context?) {
-                     context?.startActivity(Intent(context, LoginActivity::class.java))
-                 }
-     
-                 override fun onGetUserInfo(): CommunityUserInfo? {
-                     if (phone == null || token == null) {
-                         return null
-                     }
-                     var userInfo = CommunityUserInfo(token, phone)
-                     return userInfo
-                 }
-     
-                 override fun onShare(context: Context?, json: String?) {
-                     toast("调起宿主分享"+json)
-                 }
-     
-                 override fun onPay(context: Context?, orderId: String?, payMoney: BigDecimal?) {
-                     toast("调起宿主支付" + orderId + payMoney)
-                 }
-             })
+                     CommunityFactory.getInstance()?.initCallBack(object : CommunityCallBack {
+                         override fun onGetTempAddress(): CommunityAddress? {
+                             toast("获取地址信息")
+                             return null
+                         }
+             
+                         override fun onGetUserAddressList(context: Context?): List<CommunityAddress>? {
+                             toast("获取地址列表信息")
+                             return null
+                         }
+             
+                         override fun onTryLogin(context: Context?) {
+                             context?.startActivity(Intent(context, LoginActivity::class.java))
+                         }
+             
+                         override fun onGetUserInfo(): CommunityUserInfo? {
+                             if (phone == null || token == null) {
+                                 return null
+                             }
+                             var userInfo = CommunityUserInfo(token, phone, "", "")
+                             return userInfo
+                         }
+             
+                         override fun onShare(context: Context?, json: String?) {
+                             toast("调起宿主分享"+json)
+                         }
+             
+                         override fun onPay(context: Context?, orderId: String?, payMoney: BigDecimal?) {
+                             toast("调起宿主支付" + orderId + payMoney)
+                         }
+                     })
             
      宿主app如果有登录功能，登录成功后执行：
      CommunityFactory.getInstance()?.onSaveUserInfo(userInfo)
      
      宿主app如果有LBS功能，定位成功后执行：
-     CommunityFactory.getInstance()?.onSaveLocation(this@LocationActivity, location)
+     CommunityFactory.getInstance()?.onSaveTempAddress(this@LocationActivity, location)
      
      跳转到国安社区页面
      CommunityFactory.getInstance()?.onIntoCommunityHome(this)

@@ -23,8 +23,8 @@ android {
 }
 
 dependencies {
-    //    implementation project(':communitysdk')
-    compile 'com.guoan.community.sdk:communitysdk:1.0.5'
+//        implementation project(':communitysdk')
+    compile 'com.guoan.community.sdk:communitysdk:1.0.6'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:25.4.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'

@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import com.guoan.community.sdk.CommunityFactory
 import com.guoan.community.sdk.business.CommunityCallBack
-import com.guoan.community.sdk.store.CommunityLocation
+import com.guoan.community.sdk.store.CommunityAddress
 import com.guoan.community.sdk.userinfo.CommunityUserInfo
 import org.jetbrains.anko.toast
 import java.math.BigDecimal
@@ -30,12 +30,14 @@ class MyApplication : Application() {
         //集成国安社区
         CommunityFactory.getInstance()?.initSdkAuth(applicationContext, null, null)
         CommunityFactory.getInstance()?.initCallBack(object : CommunityCallBack {
-            override fun onTryLocation(context: Context?) {
-                toast("无法获取位置信息,待宿主定位")
+            override fun onGetTempAddress(): CommunityAddress? {
+                toast("获取地址信息")
+                return null
             }
 
-            override fun onGetLocation(): CommunityLocation? {
-                return CommunityLocation(lat, lon, "xxx", cityCode, "xxx", "xxx")
+            override fun onGetUserAddressList(context: Context?): List<CommunityAddress>? {
+                toast("获取地址列表信息")
+                return null
             }
 
             override fun onTryLogin(context: Context?) {
@@ -46,7 +48,7 @@ class MyApplication : Application() {
                 if (phone == null || token == null) {
                     return null
                 }
-                var userInfo = CommunityUserInfo(token, phone)
+                var userInfo = CommunityUserInfo(token, phone, "", "")
                 return userInfo
             }
 
