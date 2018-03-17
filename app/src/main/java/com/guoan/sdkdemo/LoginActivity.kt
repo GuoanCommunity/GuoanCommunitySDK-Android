@@ -3,7 +3,7 @@ package com.guoan.sdkdemo
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.guoan.community.sdk.CommunityFactory
-import com.guoan.community.sdk.userinfo.CommunityUserInfo
+import com.guoan.community.sdk.business.UserInfo
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.onClick
 
@@ -23,7 +23,7 @@ class LoginActivity : AppCompatActivity() {
             MyApplication.phone = accout?.text?.toString()
             MyApplication.token = token
 
-            var info = CommunityUserInfo(MyApplication.token, MyApplication.phone, "", "")
+            var info = UserInfo(MyApplication.token, MyApplication.phone, "", "")
             CommunityFactory.getInstance()?.onSaveUserInfo(info)
 
             finish()

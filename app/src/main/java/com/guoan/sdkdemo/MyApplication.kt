@@ -5,8 +5,8 @@ import android.content.Context
 import android.content.Intent
 import com.guoan.community.sdk.CommunityFactory
 import com.guoan.community.sdk.business.CommunityCallBack
-import com.guoan.community.sdk.store.CommunityAddress
-import com.guoan.community.sdk.userinfo.CommunityUserInfo
+import com.guoan.community.sdk.business.LocationInfo
+import com.guoan.community.sdk.business.UserInfo
 import org.jetbrains.anko.toast
 import java.math.BigDecimal
 
@@ -30,12 +30,12 @@ class MyApplication : Application() {
         //集成国安社区
         CommunityFactory.getInstance()?.initSdkAuth(applicationContext, null, null)
         CommunityFactory.getInstance()?.initCallBack(object : CommunityCallBack {
-            override fun onGetTempAddress(): CommunityAddress? {
-                toast("获取地址信息")
+            override fun onGetTempAddress(): LocationInfo? {
+                toast("获取位置信息")
                 return null
             }
 
-            override fun onGetUserAddressList(context: Context?): List<CommunityAddress>? {
+            override fun onGetUserAddressList(context: Context?): String? {
                 toast("获取地址列表信息")
                 return null
             }
@@ -44,11 +44,11 @@ class MyApplication : Application() {
                 context?.startActivity(Intent(context, LoginActivity::class.java))
             }
 
-            override fun onGetUserInfo(): CommunityUserInfo? {
+            override fun onGetUserInfo(): UserInfo? {
                 if (phone == null || token == null) {
                     return null
                 }
-                var userInfo = CommunityUserInfo(token, phone, "", "")
+                var userInfo = UserInfo(token, phone, "", "")
                 return userInfo
             }
 

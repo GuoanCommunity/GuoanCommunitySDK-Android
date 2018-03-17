@@ -6,11 +6,10 @@ import android.widget.Toast;
 
 import com.guoan.community.sdk.CommunityFactory;
 import com.guoan.community.sdk.business.CommunityCallBack;
-import com.guoan.community.sdk.store.CommunityAddress;
-import com.guoan.community.sdk.userinfo.CommunityUserInfo;
+import com.guoan.community.sdk.business.LocationInfo;
+import com.guoan.community.sdk.business.UserInfo;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 /**
  *
@@ -27,14 +26,14 @@ public class MyApplication extends Application {
         CommunityFactory.Companion.getInstance().initCallBack(new CommunityCallBack() {
 
             @Override
-            public List<CommunityAddress> onGetUserAddressList(Context context) {
+            public String onGetUserAddressList(Context context) {
                 Toast.makeText(context, "获取地址列表", Toast.LENGTH_SHORT).show();
                 return null;
             }
 
             @Override
-            public CommunityAddress onGetTempAddress() {
-                Toast.makeText(getApplicationContext(), "获取地址", Toast.LENGTH_SHORT).show();
+            public LocationInfo onGetTempAddress() {
+                Toast.makeText(getApplicationContext(), "获取位置信息", Toast.LENGTH_SHORT).show();
                 return null;
             }
 
@@ -45,7 +44,7 @@ public class MyApplication extends Application {
             }
 
             @Override
-            public CommunityUserInfo onGetUserInfo() {
+            public UserInfo onGetUserInfo() {
                 Toast.makeText(getApplicationContext(), "获取用户信息", Toast.LENGTH_SHORT).show();
 
                 return null;
