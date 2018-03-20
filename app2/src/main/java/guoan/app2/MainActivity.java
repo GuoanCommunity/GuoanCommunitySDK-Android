@@ -9,7 +9,9 @@ import android.widget.TextView;
 import com.guoan.community.sdk.CommunityFactory;
 
 /**
- * Created by andylove on 2018/3/1.
+ *
+ * @author andylove
+ * @date 2018/3/1
  */
 
 public class MainActivity extends AppCompatActivity {

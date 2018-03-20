@@ -7,12 +7,12 @@ import android.widget.Toast;
 import com.guoan.community.sdk.CommunityFactory;
 import com.guoan.community.sdk.business.CommunityCallBack;
 import com.guoan.community.sdk.business.LocationInfo;
+import com.guoan.community.sdk.business.ShareInfo;
 import com.guoan.community.sdk.business.UserInfo;
 
 import java.math.BigDecimal;
 
 /**
- *
  * @author andylove
  * @date 2018/3/1
  */
@@ -22,7 +22,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        CommunityFactory.Companion.getInstance().initSdkAuth(getApplicationContext(), null, null);
+        CommunityFactory.Companion.getInstance().initSdkAuth(getApplicationContext());
         CommunityFactory.Companion.getInstance().initCallBack(new CommunityCallBack() {
 
             @Override
@@ -51,7 +51,7 @@ public class MyApplication extends Application {
             }
 
             @Override
-            public void onShare(Context context, String json) {
+            public void onShare(Context context, ShareInfo shareInfo) {
                 Toast.makeText(context, "去分享", Toast.LENGTH_SHORT).show();
 
             }

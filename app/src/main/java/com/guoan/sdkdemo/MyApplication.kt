@@ -6,6 +6,7 @@ import android.content.Intent
 import com.guoan.community.sdk.CommunityFactory
 import com.guoan.community.sdk.business.CommunityCallBack
 import com.guoan.community.sdk.business.LocationInfo
+import com.guoan.community.sdk.business.ShareInfo
 import com.guoan.community.sdk.business.UserInfo
 import org.jetbrains.anko.toast
 import java.math.BigDecimal
@@ -28,7 +29,7 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         //集成国安社区
-        CommunityFactory.getInstance()?.initSdkAuth(applicationContext, null, null)
+        CommunityFactory.getInstance()?.initSdkAuth(applicationContext)
         CommunityFactory.getInstance()?.initCallBack(object : CommunityCallBack {
             override fun onGetTempAddress(): LocationInfo? {
                 toast("获取位置信息")
@@ -52,8 +53,8 @@ class MyApplication : Application() {
                 return userInfo
             }
 
-            override fun onShare(context: Context?, json: String?) {
-                toast("调起宿主分享"+json)
+            override fun onShare(context: Context?, shareInfo: ShareInfo?) {
+                toast("调起宿主分享")
             }
 
             override fun onPay(context: Context?, orderId: String?, payMoney: BigDecimal?) {

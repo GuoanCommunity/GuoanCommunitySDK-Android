@@ -47,38 +47,38 @@
            android:value="ooooooooooo" />
            
      在宿主项目application基类onCreate()里面：
-             CommunityFactory.getInstance()?.initSdkAuth(applicationContext, null, null)
-                     CommunityFactory.getInstance()?.initCallBack(object : CommunityCallBack {
-                         override fun onGetTempAddress(): CommunityAddress? {
-                             toast("获取地址信息")
-                             return null
-                         }
-             
-                         override fun onGetUserAddressList(context: Context?): List<CommunityAddress>? {
-                             toast("获取地址列表信息")
-                             return null
-                         }
-             
-                         override fun onTryLogin(context: Context?) {
-                             context?.startActivity(Intent(context, LoginActivity::class.java))
-                         }
-             
-                         override fun onGetUserInfo(): CommunityUserInfo? {
-                             if (phone == null || token == null) {
-                                 return null
-                             }
-                             var userInfo = CommunityUserInfo(token, phone, "", "")
-                             return userInfo
-                         }
-             
-                         override fun onShare(context: Context?, json: String?) {
-                             toast("调起宿主分享"+json)
-                         }
-             
-                         override fun onPay(context: Context?, orderId: String?, payMoney: BigDecimal?) {
-                             toast("调起宿主支付" + orderId + payMoney)
-                         }
-                     })
+          CommunityFactory.getInstance()?.initSdkAuth(applicationContext)
+          CommunityFactory.getInstance()?.initCallBack(object : CommunityCallBack {
+                      override fun onGetTempAddress(): LocationInfo? {
+                          toast("获取位置信息")
+                          return null
+                      }
+          
+                      override fun onGetUserAddressList(context: Context?): String? {
+                          toast("获取地址列表信息")
+                          return null
+                      }
+          
+                      override fun onTryLogin(context: Context?) {
+                          context?.startActivity(Intent(context, LoginActivity::class.java))
+                      }
+          
+                      override fun onGetUserInfo(): UserInfo? {
+                          if (phone == null || token == null) {
+                              return null
+                          }
+                          var userInfo = UserInfo(token, phone, "", "")
+                          return userInfo
+                      }
+          
+                      override fun onShare(context: Context?, shareInfo: ShareInfo?) {
+                          toast("调起宿主分享")
+                      }
+          
+                      override fun onPay(context: Context?, orderId: String?, payMoney: BigDecimal?) {
+                          toast("调起宿主支付" + orderId + payMoney)
+                      }
+                  })
             
      宿主app如果有登录功能，登录成功后执行：
      CommunityFactory.getInstance()?.onSaveUserInfo(userInfo)
@@ -87,7 +87,9 @@
      CommunityFactory.getInstance()?.onSaveTempAddress(this@LocationActivity, location)
      
      跳转到国安社区页面
-     CommunityFactory.getInstance()?.onIntoCommunityHome(this)
+     CommunityFactory.getInstance()?.onIntoCommunityHome(context)
+     CommunityFactory.getInstance()?.onIntoCommunityHome(context, true)
+     CommunityFactory.getInstance()?.onIntoCommunityHome(context, true, "url")
      
      销毁sdk
      在宿主app的退出app方法体内执行：
