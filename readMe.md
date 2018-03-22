@@ -22,7 +22,7 @@
 **文件app/build.gradle**
 
     dependencies {
-        implementation 'com.guoan.community.sdk:lib.communitysdk:1.1.0'
+        implementation 'com.guoan.community.sdk:communitysdk:1.1.0'
      }
      
 **可能遇到的冲突**
