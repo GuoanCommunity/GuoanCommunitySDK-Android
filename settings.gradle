@@ -1,1 +1,3 @@
-include ':app', ':communitysdk', ':app2'
+include ':app', ':app2'
+include ':lib.communitysdk'
+project(':lib.communitysdk').projectDir = new File('E:\\git\\guoan_community\\communitysdk')
