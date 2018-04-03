@@ -4,10 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import com.guoan.community.sdk.CommunityFactory
-import com.guoan.community.sdk.business.CommunityCallBack
-import com.guoan.community.sdk.business.LocationInfo
-import com.guoan.community.sdk.business.ShareInfo
-import com.guoan.community.sdk.business.UserInfo
+import com.guoan.community.sdk.business.*
 import org.jetbrains.anko.toast
 import java.math.BigDecimal
 
@@ -31,14 +28,15 @@ class MyApplication : Application() {
         //集成国安社区
         CommunityFactory.getInstance()?.initSdkAuth(applicationContext)
         CommunityFactory.getInstance()?.initCallBack(object : CommunityCallBack {
-            override fun onGetTempAddress(): LocationInfo? {
-                toast("获取位置信息")
-                return null
+            override fun onGetUserAddressList(context: Context?, jsInterface: CommunityJavaScriptInterface?, responseId: String?) {
+                toast("异步获取地址列表信息")
+                jsInterface?.callBackAddList(responseId, null)
             }
 
-            override fun onGetUserAddressList(context: Context?): String? {
-                toast("获取地址列表信息")
-                return null
+            override fun onGetTempAddress(): LocationInfo? {
+                toast("获取位置信息")
+                var locationInfo = LocationInfo(lat, lon, cityCode)
+                return locationInfo
             }
 
             override fun onTryLogin(context: Context?) {
@@ -49,7 +47,7 @@ class MyApplication : Application() {
                 if (phone == null || token == null) {
                     return null
                 }
-                var userInfo = UserInfo(token, phone, "", "")
+                var userInfo = UserInfo(token, "", phone, "")
                 return userInfo
             }
 

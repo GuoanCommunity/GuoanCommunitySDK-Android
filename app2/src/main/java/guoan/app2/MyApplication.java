@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.guoan.community.sdk.CommunityFactory;
 import com.guoan.community.sdk.business.CommunityCallBack;
+import com.guoan.community.sdk.business.CommunityJavaScriptInterface;
 import com.guoan.community.sdk.business.LocationInfo;
 import com.guoan.community.sdk.business.ShareInfo;
 import com.guoan.community.sdk.business.UserInfo;
@@ -26,9 +27,9 @@ public class MyApplication extends Application {
         CommunityFactory.Companion.getInstance().initCallBack(new CommunityCallBack() {
 
             @Override
-            public String onGetUserAddressList(Context context) {
-                Toast.makeText(context, "获取地址列表", Toast.LENGTH_SHORT).show();
-                return null;
+            public void onGetUserAddressList(Context context, CommunityJavaScriptInterface jsInterface, String responseId) {
+                Toast.makeText(context, "异步获取地址列表", Toast.LENGTH_SHORT).show();
+                jsInterface.callBackAddList(responseId, null);
             }
 
             @Override

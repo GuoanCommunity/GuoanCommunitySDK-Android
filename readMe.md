@@ -22,7 +22,7 @@
 **文件app/build.gradle**
 
     dependencies {
-        implementation 'com.guoan.community.sdk:communitysdk:1.2.0'
+        implementation 'com.guoan.community.sdk:communitysdk:1.2.1'
      }
      
 **可能遇到的冲突**
@@ -54,10 +54,10 @@
                           return null
                       }
           
-                      override fun onGetUserAddressList(context: Context?): String? {
-                          toast("获取地址列表信息")
-                          return null
-                      }
+                      override fun onGetUserAddressList(context: Context?, jsInterface: CommunityJavaScriptInterface?, responseId: String?) {
+                          toast("异步获取地址列表信息")
+                          jsInterface?.callBackAddList(responseId, null)
+                       }
           
                       override fun onTryLogin(context: Context?) {
                           context?.startActivity(Intent(context, LoginActivity::class.java))
@@ -79,13 +79,7 @@
                           toast("调起宿主支付" + orderId + payMoney)
                       }
                   })
-            
-     宿主app如果有登录功能，登录成功后执行：
-     CommunityFactory.getInstance()?.onSaveUserInfo(userInfo)
-     
-     宿主app如果有LBS功能，定位成功后执行：
-     CommunityFactory.getInstance()?.onSaveTempAddress(this@LocationActivity, location)
-     
+           
      跳转到国安社区页面
      CommunityFactory.getInstance()?.onIntoCommunityHome(context)
      CommunityFactory.getInstance()?.onIntoCommunityHome(context, true)
