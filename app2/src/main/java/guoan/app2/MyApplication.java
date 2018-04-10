@@ -27,6 +27,11 @@ public class MyApplication extends Application {
         CommunityFactory.Companion.getInstance().initCallBack(new CommunityCallBack() {
 
             @Override
+            public void onPay(Context context, CommunityJavaScriptInterface jsInterface, String responseId, String orderId, BigDecimal payMoney) {
+                Toast.makeText(context, "去支付", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
             public void onGetUserAddressList(Context context, CommunityJavaScriptInterface jsInterface, String responseId) {
                 Toast.makeText(context, "异步获取地址列表", Toast.LENGTH_SHORT).show();
                 jsInterface.callBackAddList(responseId, null);
@@ -36,12 +41,6 @@ public class MyApplication extends Application {
             public LocationInfo onGetTempAddress() {
                 Toast.makeText(getApplicationContext(), "获取位置信息", Toast.LENGTH_SHORT).show();
                 return null;
-            }
-
-            @Override
-            public void onPay(Context context, String orderId, BigDecimal payMoney) {
-                Toast.makeText(context, "去支付", Toast.LENGTH_SHORT).show();
-
             }
 
             @Override

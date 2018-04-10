@@ -21,6 +21,7 @@ class MyApplication : Application() {
         var lat: String? = null
         var lon: String? = null
         var cityCode: String? = null
+        var sJsInterface: CommunityJavaScriptInterface? = null
     }
 
     override fun onCreate() {
@@ -30,7 +31,8 @@ class MyApplication : Application() {
         CommunityFactory.getInstance()?.initCallBack(object : CommunityCallBack {
             override fun onGetUserAddressList(context: Context?, jsInterface: CommunityJavaScriptInterface?, responseId: String?) {
                 toast("异步获取地址列表信息")
-                jsInterface?.callBackAddList(responseId, null)
+                //获取用户地址列表后回调
+                //jsInterface?.callBackAddList(responseId, null)
             }
 
             override fun onGetTempAddress(): LocationInfo? {
@@ -55,8 +57,16 @@ class MyApplication : Application() {
                 toast("调起宿主分享")
             }
 
-            override fun onPay(context: Context?, orderId: String?, payMoney: BigDecimal?) {
-                toast("调起宿主支付" + orderId + payMoney)
+            override fun onPay(context: Context?, jsInterface: CommunityJavaScriptInterface?, responseId: String?, orderId: String?, payMoney: BigDecimal?) {
+                sJsInterface = jsInterface
+                //跳转支付页面
+                var intent: Intent? = Intent(context, PayActivity::class.java)
+                intent?.putExtra("responseId", responseId)
+                intent?.putExtra("orderId", orderId)
+                intent?.putExtra("payMoney", payMoney)
+                context?.startActivity(intent)
+                //支付结束后回调（成功 失败 取消）
+                //jsInterface?.callPayed(responseId, CommunityConstants.SDK_SUCCESS)
             }
         })
 
