@@ -9,7 +9,10 @@ import com.guoan.community.sdk.business.CommunityCallBack;
 import com.guoan.community.sdk.business.CommunityJavaScriptInterface;
 import com.guoan.community.sdk.business.LocationInfo;
 import com.guoan.community.sdk.business.ShareInfo;
+import com.guoan.community.sdk.business.StoreInfo;
 import com.guoan.community.sdk.business.UserInfo;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.math.BigDecimal;
 
@@ -25,6 +28,13 @@ public class MyApplication extends Application {
         super.onCreate();
         CommunityFactory.Companion.getInstance().initSdkAuth(getApplicationContext());
         CommunityFactory.Companion.getInstance().initCallBack(new CommunityCallBack() {
+
+            @Nullable
+            @Override
+            public StoreInfo onGetStoreInfo() {
+                Toast.makeText(getApplicationContext(), "获取门店信息", Toast.LENGTH_SHORT).show();
+                return null;
+            }
 
             @Override
             public void onPay(Context context, CommunityJavaScriptInterface jsInterface, String responseId, String orderId, BigDecimal payMoney) {

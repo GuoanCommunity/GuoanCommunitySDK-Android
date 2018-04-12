@@ -29,6 +29,11 @@ class MyApplication : Application() {
         //集成国安社区
         CommunityFactory.getInstance()?.initSdkAuth(applicationContext)
         CommunityFactory.getInstance()?.initCallBack(object : CommunityCallBack {
+            override fun onGetStoreInfo(): StoreInfo? {
+                toast("获取门店信息")
+                return null
+            }
+
             override fun onGetUserAddressList(context: Context?, jsInterface: CommunityJavaScriptInterface?, responseId: String?) {
                 toast("异步获取地址列表信息")
                 //获取用户地址列表后回调
