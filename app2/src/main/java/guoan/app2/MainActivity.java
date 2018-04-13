@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CommunityFactory.Companion.getInstance().onIntoCommunityHome(MainActivity.this);
+                CommunityFactory.Companion.getInstance().onIntoCommunityHome(MainActivity.this,null,true,null);
             }
         });
 

@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         ck_enter_sdk?.onClick {
-            CommunityFactory.getInstance()?.onIntoCommunityHome(this@MainActivity)
+            CommunityFactory.getInstance()?.onIntoCommunityHome(this@MainActivity,null,true,null)
         }
         login?.onClick {
             startActivity(Intent(this@MainActivity, LoginActivity::class.java))

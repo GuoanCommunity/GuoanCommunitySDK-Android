@@ -98,9 +98,8 @@
            
            
      跳转到国安社区页面
-     CommunityFactory.getInstance()?.onIntoCommunityHome(context)
-     CommunityFactory.getInstance()?.onIntoCommunityHome(context, true)
-     CommunityFactory.getInstance()?.onIntoCommunityHome(context, true, "url")
+     CommunityFactory.getInstance()?.onIntoCommunityHome(this@MainActivity,null,true,null)
+
      
      销毁sdk
      在宿主app的退出app方法体内执行：
