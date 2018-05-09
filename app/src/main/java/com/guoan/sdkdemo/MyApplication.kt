@@ -1,12 +1,13 @@
 package com.guoan.sdkdemo
 
+import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.content.Intent
 import com.guoan.community.sdk.CommunityFactory
 import com.guoan.community.sdk.business.*
+import com.guoan.community.sdk.business.pay.CommunityPayment
 import org.jetbrains.anko.toast
-import java.math.BigDecimal
 
 /**
  * Created by andylove on 2018/2/8.
@@ -22,6 +23,7 @@ class MyApplication : Application() {
         var lon: String? = null
         var cityCode: String? = null
         var sJsInterface: CommunityJavaScriptInterface? = null
+        var sResponseId: String? = null
     }
 
     override fun onCreate() {
@@ -29,6 +31,10 @@ class MyApplication : Application() {
         //集成国安社区
         CommunityFactory.getInstance()?.initSdkAuth(applicationContext)
         CommunityFactory.getInstance()?.initCallBack(object : CommunityCallBack {
+            override fun onJumpNative(context: Context?, type: String?, param: String?) {
+                toast("跳到国安社区的具体页面" + type + "----" + param)
+            }
+
             override fun onGetStoreInfo(): StoreInfo? {
                 toast("获取门店信息")
                 return null
@@ -46,8 +52,8 @@ class MyApplication : Application() {
                 return locationInfo
             }
 
-            override fun onTryLogin(context: Context?) {
-                context?.startActivity(Intent(context, LoginActivity::class.java))
+            override fun onTryLogin(context: Context?, reqCode: Int) {
+                (context as Activity).startActivityForResult(Intent(context, LoginActivity::class.java), reqCode)
             }
 
             override fun onGetUserInfo(): UserInfo? {
@@ -62,16 +68,17 @@ class MyApplication : Application() {
                 toast("调起宿主分享")
             }
 
-            override fun onPay(context: Context?, jsInterface: CommunityJavaScriptInterface?, responseId: String?, orderId: String?, payMoney: BigDecimal?) {
+            override fun onPay(context: Context?, jsInterface: CommunityJavaScriptInterface?, responseId: String?, payment: CommunityPayment?) {
                 sJsInterface = jsInterface
-                //跳转支付页面
+                sResponseId = responseId
+                //跳转订单支付页面
                 var intent: Intent? = Intent(context, PayActivity::class.java)
                 intent?.putExtra("responseId", responseId)
-                intent?.putExtra("orderId", orderId)
-                intent?.putExtra("payMoney", payMoney)
+                intent?.putExtra("orderId", payment?.param)
+                intent?.putExtra("payMoney", payment?.amount)
                 context?.startActivity(intent)
                 //支付结束后回调（成功 失败 取消）
-                //jsInterface?.callPayed(responseId, CommunityConstants.SDK_SUCCESS)
+//                MyApplication.sJsInterface?.callPayed(MyApplication.sResponseId, CommunityConstants.SDK_SUCCESS)
             }
         })
 

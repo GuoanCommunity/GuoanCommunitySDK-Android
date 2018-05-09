@@ -67,9 +67,9 @@
                           return locationInfo
                       }
           
-                      override fun onTryLogin(context: Context?) {
-                          context?.startActivity(Intent(context, LoginActivity::class.java))
-                      }
+                       override fun onTryLogin(context: Context?, reqCode: Int) {
+                          (context as Activity).startActivityForResult(Intent(context, LoginActivity::class.java), reqCode)
+                       }
           
                       override fun onGetUserInfo(): UserInfo? {
                           if (phone == null || token == null) {
@@ -83,17 +83,18 @@
                           toast("调起宿主分享")
                       }
           
-                      override fun onPay(context: Context?, jsInterface: CommunityJavaScriptInterface?, responseId: String?, orderId: String?, payMoney: BigDecimal?) {
-                          sJsInterface = jsInterface
-                          //跳转支付页面
-                          var intent: Intent? = Intent(context, PayActivity::class.java)
-                          intent?.putExtra("responseId", responseId)
-                          intent?.putExtra("orderId", orderId)
-                          intent?.putExtra("payMoney", payMoney)
-                          context?.startActivity(intent)
-                          //支付结束后回调（成功 失败 取消）
-                          //jsInterface?.callPayed(responseId, CommunityConstants.SDK_SUCCESS)
-                      }
+                      override fun onPay(context: Context?, jsInterface: CommunityJavaScriptInterface?, responseId: String?, payment: CommunityPayment?) {
+                                      sJsInterface = jsInterface
+                                      sResponseId = responseId
+                                      //跳转订单支付页面
+                                      var intent: Intent? = Intent(context, PayActivity::class.java)
+                                      intent?.putExtra("responseId", responseId)
+                                      intent?.putExtra("orderId", payment?.param)
+                                      intent?.putExtra("payMoney", payment?.amount)
+                                      context?.startActivity(intent)
+                                      //支付结束后回调（成功 失败 取消）
+                      //                MyApplication.sJsInterface?.callPayed(MyApplication.sResponseId, CommunityConstants.SDK_SUCCESS)
+                                  }
                   })
            
            

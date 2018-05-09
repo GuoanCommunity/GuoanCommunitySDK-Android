@@ -11,10 +11,9 @@ import com.guoan.community.sdk.business.LocationInfo;
 import com.guoan.community.sdk.business.ShareInfo;
 import com.guoan.community.sdk.business.StoreInfo;
 import com.guoan.community.sdk.business.UserInfo;
+import com.guoan.community.sdk.business.pay.CommunityPayment;
 
 import org.jetbrains.annotations.Nullable;
-
-import java.math.BigDecimal;
 
 /**
  * @author andylove
@@ -29,16 +28,21 @@ public class MyApplication extends Application {
         CommunityFactory.Companion.getInstance().initSdkAuth(getApplicationContext());
         CommunityFactory.Companion.getInstance().initCallBack(new CommunityCallBack() {
 
+            @Override
+            public void onPay(@Nullable Context context, @Nullable CommunityJavaScriptInterface jsInterface, @Nullable String responseId, @Nullable CommunityPayment payment) {
+                Toast.makeText(context, "去支付", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onJumpNative(Context context, String type, String param) {
+                Toast.makeText(getApplicationContext(), "跳到国安社区的具体页面" + type + "----" + param, Toast.LENGTH_SHORT).show();
+            }
+
             @Nullable
             @Override
             public StoreInfo onGetStoreInfo() {
                 Toast.makeText(getApplicationContext(), "获取门店信息", Toast.LENGTH_SHORT).show();
                 return null;
-            }
-
-            @Override
-            public void onPay(Context context, CommunityJavaScriptInterface jsInterface, String responseId, String orderId, BigDecimal payMoney) {
-                Toast.makeText(context, "去支付", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -67,9 +71,8 @@ public class MyApplication extends Application {
             }
 
             @Override
-            public void onTryLogin(Context context) {
+            public void onTryLogin(Context context, int reqCode) {
                 Toast.makeText(context, "去登录", Toast.LENGTH_SHORT).show();
-
             }
         });
     }
