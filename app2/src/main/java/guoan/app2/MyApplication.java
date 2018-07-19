@@ -1,7 +1,9 @@
 package guoan.app2;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.widget.Toast;
 
 import com.guoan.community.sdk.CommunityFactory;
@@ -13,7 +15,7 @@ import com.guoan.community.sdk.business.StoreInfo;
 import com.guoan.community.sdk.business.UserInfo;
 import com.guoan.community.sdk.business.pay.CommunityPayment;
 
-import org.jetbrains.annotations.Nullable;
+import java.util.List;
 
 /**
  * @author andylove
@@ -27,6 +29,22 @@ public class MyApplication extends Application {
         super.onCreate();
         CommunityFactory.Companion.getInstance().initSdkAuth(getApplicationContext());
         CommunityFactory.Companion.getInstance().initCallBack(new CommunityCallBack() {
+
+            @Override
+            public void onDoBeforFinished(@Nullable Activity context) {
+
+            }
+
+            @Override
+            public void onShare(@Nullable Context context, @Nullable CommunityJavaScriptInterface jsInterface, @Nullable String responseId, @Nullable ShareInfo shareInfo) {
+
+            }
+
+            @Nullable
+            @Override
+            public List<StoreInfo> onGetStoreInfoList() {
+                return null;
+            }
 
             @Override
             public void onPay(@Nullable Context context, @Nullable CommunityJavaScriptInterface jsInterface, @Nullable String responseId, @Nullable CommunityPayment payment) {
@@ -62,12 +80,6 @@ public class MyApplication extends Application {
                 Toast.makeText(getApplicationContext(), "获取用户信息", Toast.LENGTH_SHORT).show();
 
                 return null;
-            }
-
-            @Override
-            public void onShare(Context context, ShareInfo shareInfo) {
-                Toast.makeText(context, "去分享", Toast.LENGTH_SHORT).show();
-
             }
 
             @Override

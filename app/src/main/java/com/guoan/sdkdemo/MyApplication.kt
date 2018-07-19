@@ -31,6 +31,16 @@ class MyApplication : Application() {
         //集成国安社区
         CommunityFactory.getInstance()?.initSdkAuth(applicationContext)
         CommunityFactory.getInstance()?.initCallBack(object : CommunityCallBack {
+            override fun onGetStoreInfoList(): List<StoreInfo>? {
+                return null
+            }
+
+            override fun onShare(context: Context?, jsInterface: CommunityJavaScriptInterface?, responseId: String?, shareInfo: ShareInfo?) {
+            }
+
+            override fun onDoBeforFinished(context: Activity?) {
+            }
+
             override fun onJumpNative(context: Context?, type: String?, param: String?) {
                 toast("跳到国安社区的具体页面" + type + "----" + param)
             }
@@ -62,10 +72,6 @@ class MyApplication : Application() {
                 }
                 var userInfo = UserInfo(token, "", phone, "")
                 return userInfo
-            }
-
-            override fun onShare(context: Context?, shareInfo: ShareInfo?) {
-                toast("调起宿主分享")
             }
 
             override fun onPay(context: Context?, jsInterface: CommunityJavaScriptInterface?, responseId: String?, payment: CommunityPayment?) {

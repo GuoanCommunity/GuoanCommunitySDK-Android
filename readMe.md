@@ -22,7 +22,7 @@
 **文件app/build.gradle**
 
     dependencies {
-        implementation 'com.guoan.community.sdk:communitysdk:1.2.7'
+        implementation 'com.guoan.community.sdk:communitysdk:1.3.0'
      }
      
 **可能遇到的冲突**
@@ -50,40 +50,52 @@
           CommunityFactory.getInstance()?.initSdkAuth(applicationContext)
           CommunityFactory.getInstance()?.initCallBack(object : CommunityCallBack {
                       
-                       override fun onGetStoreInfo(): StoreInfo? {
+                      override fun onGetStoreInfoList(): List<StoreInfo>? {
+                                      TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                                  }
+                      
+                                  override fun onShare(context: Context?, jsInterface: CommunityJavaScriptInterface?, responseId: String?, shareInfo: ShareInfo?) {
+                                      TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                                  }
+                      
+                                  override fun onDoBeforFinished(context: Activity?) {
+                                      TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                                  }
+                      
+                                  override fun onJumpNative(context: Context?, type: String?, param: String?) {
+                                      toast("跳到国安社区的具体页面" + type + "----" + param)
+                                  }
+                      
+                                  override fun onGetStoreInfo(): StoreInfo? {
                                       toast("获取门店信息")
                                       return null
                                   }
                       
-                      override fun onGetUserAddressList(context: Context?, jsInterface: CommunityJavaScriptInterface?, responseId: String?) {
-                          toast("异步获取地址列表信息")
-                          //获取用户地址列表后回调
-                          //jsInterface?.callBackAddList(responseId, null)
-                      }
-          
-                      override fun onGetTempAddress(): LocationInfo? {
-                          toast("获取位置信息")
-                          var locationInfo = LocationInfo(lat, lon, cityCode)
-                          return locationInfo
-                      }
-          
-                       override fun onTryLogin(context: Context?, reqCode: Int) {
-                          (context as Activity).startActivityForResult(Intent(context, LoginActivity::class.java), reqCode)
-                       }
-          
-                      override fun onGetUserInfo(): UserInfo? {
-                          if (phone == null || token == null) {
-                              return null
-                          }
-                          var userInfo = UserInfo(token, "", phone, "")
-                          return userInfo
-                      }
-          
-                      override fun onShare(context: Context?, shareInfo: ShareInfo?) {
-                          toast("调起宿主分享")
-                      }
-          
-                      override fun onPay(context: Context?, jsInterface: CommunityJavaScriptInterface?, responseId: String?, payment: CommunityPayment?) {
+                                  override fun onGetUserAddressList(context: Context?, jsInterface: CommunityJavaScriptInterface?, responseId: String?) {
+                                      toast("异步获取地址列表信息")
+                                      //获取用户地址列表后回调
+                                      //jsInterface?.callBackAddList(responseId, null)
+                                  }
+                      
+                                  override fun onGetTempAddress(): LocationInfo? {
+                                      toast("获取位置信息")
+                                      var locationInfo = LocationInfo(lat, lon, cityCode)
+                                      return locationInfo
+                                  }
+                      
+                                  override fun onTryLogin(context: Context?, reqCode: Int) {
+                                      (context as Activity).startActivityForResult(Intent(context, LoginActivity::class.java), reqCode)
+                                  }
+                      
+                                  override fun onGetUserInfo(): UserInfo? {
+                                      if (phone == null || token == null) {
+                                          return null
+                                      }
+                                      var userInfo = UserInfo(token, "", phone, "")
+                                      return userInfo
+                                  }
+                      
+                                  override fun onPay(context: Context?, jsInterface: CommunityJavaScriptInterface?, responseId: String?, payment: CommunityPayment?) {
                                       sJsInterface = jsInterface
                                       sResponseId = responseId
                                       //跳转订单支付页面
