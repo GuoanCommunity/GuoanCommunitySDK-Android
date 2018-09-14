@@ -1,3 +1,5 @@
 include ':app', ':app2'
 include ':communitysdk'
 project(':communitysdk').projectDir = new File('E:\\git\\guoan_community\\communitysdk')
+include ':xrecyclerview'
+project(':xrecyclerview').projectDir = new File('E:\\git\\guoan_community\\xrecyclerview')
