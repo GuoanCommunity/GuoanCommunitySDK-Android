@@ -32,6 +32,14 @@
 
 
     <EditText
+        android:id="@+id/loc_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="定位地址"
+        android:text="010"
+        android:padding="10dp"/>
+
+    <EditText
         android:id="@+id/city_code"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

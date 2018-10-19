@@ -22,7 +22,7 @@
 **文件app/build.gradle**
 
     dependencies {
-        implementation 'com.guoan.community.sdk:communitysdk:1.3.0'
+        implementation 'com.guoan.community.sdk:communitysdk:1.3.1'
      }
      
 **可能遇到的冲突**
@@ -38,7 +38,7 @@
 
      sdk初始化：
      
-     清单文件添加 在国安社区授权的appid和appsecret，如下
+     清单文件添加 在国安社区授权的appid和appsecret（目前不需要这个授权），如下
      <meta-data
            android:name="COMMUNITY_APP_ID"
            android:value="xxxxxxxxxxx" />
@@ -48,6 +48,8 @@
            
      在宿主项目application基类onCreate()里面：
           CommunityFactory.getInstance()?.initSdkAuth(applicationContext)
+          
+          (登录国安社区平台，可以不加初始化)
           CommunityFactory.getInstance()?.initCallBack(object : CommunityCallBack {
                       
                       override fun onGetStoreInfoList(): List<StoreInfo>? {
@@ -110,12 +112,24 @@
                   })
            
            
-     跳转到国安社区页面
+    1， 跳转到国安社区页面
      CommunityFactory.getInstance()?.onIntoCommunityHome(this@MainActivity,null,true,null)
 
-     
+    2， 登录国安社区平台
+    CommunityFactory.getInstance()?.onLoginCommunity(this@MainActivity)
+    登录成功，数据回调接收：
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+            super.onActivityResult(requestCode, resultCode, data)
+            if (CommunityConstants.SDK_COMMUNITY_LOGION_CODE == requestCode && data != null) {
+            //取国安社区用户信息
+                var loginBack: CommunityLoginBack? = data?.getSerializableExtra(CommunityConstants.SDK_COMMUNITY_LOGION_KEY) as CommunityLoginBack?
+                toast("登录成功 token：${loginBack?.customer?.appToken}")
+            }
+        }
+
      销毁sdk
      在宿主app的退出app方法体内执行：
      CommunityFactory.onDestory()
+     
      
      

@@ -32,6 +32,15 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>
 
+    <Button
+        android:id="@+id/community_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="国安社区登录"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+
 
     <Button
         android:id="@+id/loc"

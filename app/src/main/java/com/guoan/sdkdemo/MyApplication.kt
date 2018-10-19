@@ -21,6 +21,7 @@ class MyApplication : Application() {
 
         var lat: String? = null
         var lon: String? = null
+        var locAdd: String? = null
         var cityCode: String? = null
         var sJsInterface: CommunityJavaScriptInterface? = null
         var sResponseId: String? = null
@@ -58,7 +59,7 @@ class MyApplication : Application() {
 
             override fun onGetTempAddress(): LocationInfo? {
                 toast("获取位置信息")
-                var locationInfo = LocationInfo(lat, lon, cityCode)
+                var locationInfo = LocationInfo(lat, lon, cityCode, locAdd)
                 return locationInfo
             }
 
@@ -87,7 +88,6 @@ class MyApplication : Application() {
 //                MyApplication.sJsInterface?.callPayed(MyApplication.sResponseId, CommunityConstants.SDK_SUCCESS)
             }
         })
-
     }
 
 }

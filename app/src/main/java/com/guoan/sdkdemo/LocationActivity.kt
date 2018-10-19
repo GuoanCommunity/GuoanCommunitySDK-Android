@@ -19,6 +19,7 @@ class LocationActivity : AppCompatActivity() {
         loc_success?.onClick {
             MyApplication.lat = lat?.text?.toString()
             MyApplication.lon = lon.text?.toString()
+            MyApplication.locAdd = loc_address.text?.toString()
             MyApplication.cityCode = city_code.text?.toString()
 
             finish()
