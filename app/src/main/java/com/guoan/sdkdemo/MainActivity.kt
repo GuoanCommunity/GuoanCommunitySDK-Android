@@ -32,9 +32,10 @@ class MainActivity : AppCompatActivity() {
             finish()
             CommunityFactory.onDestory()
         }
-        community_login.onClick {
+        community_login?.onClick {
             CommunityFactory.getInstance()?.onLoginCommunity(this@MainActivity)
         }
+        community_login2?.loadData("<a href=\"login://com.guoan.app.sdk\">网页登录国安社区</a>", "text/html", "UTF-8")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
